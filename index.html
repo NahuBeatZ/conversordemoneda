@@ -1,41 +1,41 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Conversor de Moneda</title>
-  <link rel="stylesheet" href="estilos.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conversor de Moneda</title>
+<link rel="stylesheet" href="estilos.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <div class="container">
-    <h1>Conversor de Moneda</h1>
+<div class="container">
+<h1>Conversor de Moneda</h1>
 
-    <label for="monto">Ingrese monto</label>
-    <input type="number" id="monto" placeholder="0" />
+<label for="monto">Ingrese monto</label>
+<input type="number" id="monto" placeholder="0" />
 
-    <div class="selector">
-      <label for="monedaOrigen">De:</label>
-      <select id="monedaOrigen"></select>
-    </div>
+<div class="selector">
+<label for="monedaOrigen">De:</label>
+<select id="monedaOrigen"></select>
+</div>
 
-    <div class="selector">
-      <label for="monedaDestino">A:</label>
-      <select id="monedaDestino"></select>
-    </div>
+<div class="selector">
+<label for="monedaDestino">A:</label>
+<select id="monedaDestino"></select>
+</div>
 
-    <button onclick="convertir()">Convertir</button>
+<button onclick="convertir()">Convertir</button>
 
-    <div id="cargando" style="display:none;">Calculando...</div>
-    <p id="resultado"></p>
+<div id="cargando" style="display:none;">Calculando...</div>
+<p id="resultado"></p>
 
-    <h3>Historial de conversiones</h3>
-    <ul id="historial"></ul>
+<h3>Historial de conversiones</h3>
+<ul id="historial"></ul>
 
-    <h3>Gráfico de evolución frente a USD (últimos 7 días)</h3>
-    <canvas id="graficoMoneda"></canvas>
-  </div>
+<h3>Gráfico de evolución frente a USD (últimos 7 días)</h3>
+<canvas id="graficoMoneda"></canvas>
+</div>
 
-  <script src="scripts.js"></script>
+<script src="scripts.js"></script>
 </body>
 </html>
