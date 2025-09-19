@@ -1,0 +1,102 @@
+/* ===== Body y contenedor ===== */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to bottom right, #e0eafc, #cfdef3);
+  margin: 0;
+  padding: 20px;
+  color: #333;
+}
+
+.container {
+  max-width: 650px;
+  margin: auto;
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* ===== Tipografía ===== */
+h1 {
+  text-align: center;
+  font-weight: 700;
+  color: #007BFF;
+  margin-bottom: 20px;
+}
+
+h3 {
+  margin-top: 25px;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+/* ===== Inputs y select ===== */
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  transition: 0.2s;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #007BFF;
+  box-shadow: 0 0 5px rgba(0,123,255,0.3);
+}
+
+/* ===== Botón principal ===== */
+button {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 12px;
+  border: none;
+  color: white;
+  background: linear-gradient(135deg, #007BFF, #0056b3);
+  cursor: pointer;
+  transition: 0.2s;
+  margin-top: 10px;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #0056b3, #003f7f);
+  transform: scale(1.03);
+}
+
+/* ===== Resultado animado ===== */
+#resultado {
+  font-size: 1.2rem;
+  margin: 10px 0;
+  text-align: center;
+  font-weight: 600;
+}
+
+#resultado.animar {
+  animation: resaltar 0.3s;
+}
+
+@keyframes resaltar {
+  0% { transform: scale(1); color: #000; }
+  50% { transform: scale(1.1); color: #007BFF; }
+  100% { transform: scale(1); color: #000; }
+}
+
+/* ===== Historial ===== */
+#historial li {
+  background: #f0f4f8;
+  margin-bottom: 6px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  list-style: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* ===== Gráfico ===== */
+canvas {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin-top: 15px;
+}
