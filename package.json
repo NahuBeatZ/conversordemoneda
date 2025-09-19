@@ -1,4 +1,12 @@
 {
+  "name": "conversordemoneda",
+  "version": "1.0.0",
+  "description": "Servidor de conversión de moneda usando BCRA API",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "build": "echo 'No build needed'"
+  },
   "dependencies": {
     "express": "^5.1.0",
     "node-fetch": "^3.3.2"
