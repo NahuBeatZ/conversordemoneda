@@ -1,11 +1,10 @@
 const express = require("express");
-const fetch = require("node-fetch"); // Importa fetch
+const fetch = require("node-fetch");
 const app = express();
 
-// Usa el puerto que Render asigna, o 3000 como fallback
+// Render asigna el puerto automáticamente
 const PORT = process.env.PORT || 3000;
 
-// Middleware para parsear JSON
 app.use(express.json());
 
 // Endpoint para obtener tasas del BCRA
@@ -37,5 +36,4 @@ app.get("/tasas/:moneda", async (req, res) => {
   }
 });
 
-// Inicia el servidor
 app.listen(PORT, () => console.log(`Servidor corriendo en http://localhost:${PORT}`));
