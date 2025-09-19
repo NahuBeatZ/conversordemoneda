@@ -1,23 +1,18 @@
 const express = require("express");
-const fetch = require("node-fetch"); // Importar fetch
 const app = express();
-
-// Render define automáticamente PORT, si no existe usamos 3000 en local
-const PORT = process.env.PORT || 3000;
-
-// Token del BCRA desde variable de entorno
-const BCRA_API_KEY = process.env.BCRA_API_KEY;
+const PORT = process.env.PORT || 3000; // ✅ Usar puerto de Render
 
 app.use(express.json());
 
 // Endpoint para obtener tasas del BCRA
 app.get("/tasas/:moneda", async (req, res) => {
   const moneda = req.params.moneda.toUpperCase();
+  const token = process.env.BCRA_API_KEY; // ✅ Leer de variable de entorno
 
   try {
-    const response = await fetch(`https://api.estadisticasbcra.com/${moneda}`, {
+    const response = await fetch(`https://api.bcra.gob.ar/tasas/${moneda}`, {
       headers: {
-        Authorization: `BEARER ${BCRA_API_KEY}`
+        "Authorization": `BEARER ${token}`
       }
     });
 
@@ -34,6 +29,6 @@ app.get("/tasas/:moneda", async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});
+app.listen(PORT, () =>
+  console.log(`Servidor corriendo en http://localhost:${PORT}`)
+);
