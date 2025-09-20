@@ -1,7 +1,7 @@
 {
   "name": "conversordemoneda",
   "version": "1.0.0",
-  "description": "Servidor de conversión de moneda usando API del BCRA",
+  "description": "API para obtener tasas del BCRA",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
@@ -12,7 +12,5 @@
   },
   "engines": {
     "node": "22.x"
-  },
-  "author": "Nahuel",
-  "license": "MIT"
+  }
 }
