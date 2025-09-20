@@ -1,36 +1,35 @@
 const express = require("express");
-const fetch = (...args) =>
-  import("node-fetch").then(({ default: fetch }) => fetch(...args));
-
+const fetch = require("node-fetch");
+const path = require("path");
 const app = express();
-app.use(express.json());
 
-// Render asigna su propio puerto automáticamente
+app.use(express.json());
+app.use(express.static(path.join(__dirname, "public")));
+
 const PORT = process.env.PORT || 3000;
-// Token del BCRA desde variables de entorno en Render
 const token = process.env.BCRA_TOKEN;
 
-// Endpoint para obtener tasas del BCRA
 app.get("/tasas/:moneda", async (req, res) => {
   const moneda = req.params.moneda.toUpperCase();
 
   try {
     const response = await fetch(`https://api.bcra.gob.ar/tasas/${moneda}`, {
-      headers: { Authorization: `BEARER ${token}` },
+      headers: { "Authorization": `BEARER ${token}` }
     });
 
-    if (!response.ok) {
-      throw new Error(`Error al obtener datos: ${response.status}`);
-    }
+    if (!response.ok) throw new Error(`Error al obtener datos: ${response.status}`);
 
     const data = await response.json();
     res.json(data);
+
   } catch (err) {
-    console.error("❌ Error:", err.message);
+    console.error(err);
     res.status(500).json({ error: "No se pudo obtener la tasa" });
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
+
+app.listen(PORT, () => console.log(`Servidor corriendo en http://localhost:${PORT}`));

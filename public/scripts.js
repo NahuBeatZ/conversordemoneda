@@ -23,7 +23,10 @@ const listaMonedas = [
 
 let chartMoneda = null;
 
-// Tasas simuladas como respaldo
+// Detectar si estamos en local o en producción (Render)
+const API_URL = window.location.hostname === "localhost"
+  ? "http://localhost:3000/tasas"
+  : "https://conversordemoneda.onrender.com/tasas";
 
 // Tasas simuladas completas
 const tasasSimuladas = {
@@ -41,7 +44,6 @@ const tasasSimuladas = {
   PYG: { USD:0.00014, EUR:0.00012, ARS:0.21, BRL:0.0011, CNY:0.0014, MXN:0.0069, CLP:0.36, COP:2.03, PEN:0.0011, UYU:0.0067, BOB:0.002, PYG:1, VES:0.022 },
   VES: { USD:0.006, EUR:0.0052, ARS:0.006, BRL:0.036, CNY:0.048, MXN:0.23, CLP:11.9, COP:50, PEN:0.048, UYU:0.28, BOB:0.09, PYG:45, VES:1 }
 };
-
 
 // Cargar monedas en los selects
 function cargarMonedas() {
@@ -85,7 +87,7 @@ function cargarHistorial() {
   mostrarHistorial(historial);
 }
 
-// Conversión usando servidor local BCRA o simulada
+// Conversión usando servidor BCRA o simulada
 async function convertir() {
   const monto = parseFloat(document.getElementById("monto").value);
   const origen = monedaOrigen.value;
@@ -98,10 +100,10 @@ async function convertir() {
   resultado.innerText="";
 
   try {
-    const res = await fetch(`http://localhost:3000/tasas/${origen}`);
+    const res = await fetch(`/tasas/${origen}`);
+    
     const data = await res.json();
 
-    // Si el servidor devuelve tasa para la moneda destino, usarla; sino, simulada
     const tasa = data[destino] || (tasasSimuladas[origen][destino] || 1);
     const total = monto * tasa;
 
@@ -109,6 +111,7 @@ async function convertir() {
 
     const textoResultado = `${listaMonedas.find(m=>m.code===origen).flag} ${monto} ${origen} = ${listaMonedas.find(m=>m.code===destino).flag} ${total.toFixed(2)} ${destino}`;
     resultado.innerText = textoResultado;
+
     resultado.classList.remove("animar");
     void resultado.offsetWidth;
     resultado.classList.add("animar");
