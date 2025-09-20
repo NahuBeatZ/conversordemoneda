@@ -1,16 +1,13 @@
 {
   "name": "conversordemoneda",
   "version": "1.0.0",
-  "description": "API para obtener tasas del BCRA",
   "main": "index.js",
+  "type": "commonjs",
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
     "express": "^5.1.0",
     "node-fetch": "^3.3.2"
-  },
-  "engines": {
-    "node": "22.x"
   }
 }
