@@ -2,30 +2,20 @@ const express = require("express");
 const fetch = require("node-fetch");
 const app = express();
 
-// Render asigna el puerto automáticamente
-const PORT = process.env.PORT || 3000;
-
 app.use(express.json());
 
-// Endpoint para obtener tasas del BCRA
+const PORT = process.env.PORT || 3000;
+const token = process.env.BCRA_TOKEN;
+
 app.get("/tasas/:moneda", async (req, res) => {
   const moneda = req.params.moneda.toUpperCase();
-  const token = process.env.BCRA_TOKEN; // Variable de entorno
-
-  if (!token) {
-    return res.status(500).json({ error: "Token BCRA no configurado" });
-  }
 
   try {
     const response = await fetch(`https://api.bcra.gob.ar/tasas/${moneda}`, {
-      headers: {
-        "Authorization": `BEARER ${token}`
-      }
+      headers: { "Authorization": `BEARER ${token}` }
     });
 
-    if (!response.ok) {
-      throw new Error(`Error al obtener datos: ${response.status}`);
-    }
+    if (!response.ok) throw new Error(`Error al obtener datos: ${response.status}`);
 
     const data = await response.json();
     res.json(data);

@@ -1,0 +1,17 @@
+# Windows
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Node
+node_modules/
+npm-debug.log
+.env
+
+# VSCode
+.vscode/
+
+# Archivos personales y temporales
+*.log
+*.tmp
+.DS_Store
