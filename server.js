@@ -1,6 +1,5 @@
 require('dotenv').config();
 const express = require('express');
-const fetch = require('node-fetch');
 const cors = require('cors');
 const path = require('path');
 
@@ -13,6 +12,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Endpoint para obtener tasas
 app.get("/api/tasas", async (req, res) => {
   try {
+    // fetch global de Node 22+
     const response = await fetch('https://dolarapi.com/v1/dolares/oficial');
     const data = await response.json();
 
