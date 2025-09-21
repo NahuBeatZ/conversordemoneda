@@ -1,12 +1,16 @@
 {
-  "name": "conversordemoneda",
+  "name": "conversor-bcra",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node server.js"
   },
   "dependencies": {
-    "express": "^5.1.0",
-    "node-fetch": "^3.3.2"
+    "axios": "^1.12.2",
+    "dotenv": "^17.2.2",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }

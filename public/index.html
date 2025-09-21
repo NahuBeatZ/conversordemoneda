@@ -9,31 +9,37 @@
 </head>
 <body>
 <div class="container">
-<h1>Conversor de Moneda</h1>
+    <h1>Conversor de Moneda</h1>
 
-<label for="monto">Ingrese monto</label>
-<input type="number" id="monto" placeholder="0" />
+    <label for="monto">Ingrese monto</label>
+    <input type="number" id="monto" placeholder="0" />
 
-<div class="selector">
-<label for="monedaOrigen">De:</label>
-<select id="monedaOrigen"></select>
-</div>
+    <div class="selector">
+        <label for="monedaOrigen">De:</label>
+        <select id="monedaOrigen">
+            <option value="USD">USD</option>
+            <option value="ARS">ARS</option>
+        </select>
+    </div>
 
-<div class="selector">
-<label for="monedaDestino">A:</label>
-<select id="monedaDestino"></select>
-</div>
+    <div class="selector">
+        <label for="monedaDestino">A:</label>
+        <select id="monedaDestino">
+            <option value="ARS">ARS</option>
+            <option value="USD">USD</option>
+        </select>
+    </div>
 
-<button onclick="convertir()">Convertir</button>
+    <button onclick="convertir()">Convertir</button>
 
-<div id="cargando" style="display:none;">Calculando...</div>
-<p id="resultado"></p>
+    <div id="cargando" style="display:none;">Calculando...</div>
+    <p id="resultado"></p>
 
-<h3>Historial de conversiones</h3>
-<ul id="historial"></ul>
+    <h3>Historial de conversiones</h3>
+    <ul id="historial"></ul>
 
-<h3>Gráfico de evolución frente a USD (últimos 7 días)</h3>
-<canvas id="graficoMoneda"></canvas>
+    <h3>Gráfico de evolución frente a USD (últimos 7 días)</h3>
+    <canvas id="graficoMoneda"></canvas>
 </div>
 
 <script src="scripts.js"></script>

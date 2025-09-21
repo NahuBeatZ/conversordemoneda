@@ -1,34 +1,50 @@
-const express = require("express");
+require('dotenv').config();
+const express = require('express');
+const fetch = require('node-fetch');
+const cors = require('cors');
+const path = require('path');
+
 const app = express();
-const PORT = process.env.PORT || 3000; // ✅ Usar puerto de Render
+const PORT = process.env.PORT || 3000;
 
-app.use(express.json());
+app.use(cors());
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Endpoint para obtener tasas del BCRA
-app.get("/tasas/:moneda", async (req, res) => {
-  const moneda = req.params.moneda.toUpperCase();
-  const token = process.env.BCRA_API_KEY; // ✅ Leer de variable de entorno
-
+// Endpoint para obtener tasas
+app.get("/api/tasas", async (req, res) => {
   try {
-    const response = await fetch(`https://api.bcra.gob.ar/tasas/${moneda}`, {
-      headers: {
-        "Authorization": `BEARER ${token}`
-      }
-    });
+    const response = await fetch('https://dolarapi.com/v1/dolares/oficial');
+    const data = await response.json();
 
-    if (!response.ok) {
-      throw new Error(`Error al obtener datos: ${response.status}`);
+    // Tasas base (USD real, las demás aproximadas)
+    const tasas = {
+      USD: data.venta,
+      ARS: 1,
+      EUR: data.venta * 1.1,
+      BRL: data.venta * 0.18,
+      GBP: data.venta * 1.25,
+      JPY: data.venta * 0.012
+    };
+
+    // Histórico simulado 7 días
+    const historico = [];
+    for (let i = 6; i >= 0; i--) {
+      historico.push({
+        fecha: `Día -${i}`,
+        USD: data.venta - i * 5,
+        EUR: (data.venta - i * 5) * 1.1,
+        BRL: (data.venta - i * 5) * 0.18,
+        GBP: (data.venta - i * 5) * 1.25,
+        JPY: (data.venta - i * 5) * 0.012
+      });
     }
 
-    const data = await response.json();
-    res.json(data);
+    res.json({ tasas, historico });
 
   } catch (err) {
-    console.error(err);
+    console.error("Error obteniendo tasas:", err.message);
     res.status(500).json({ error: "No se pudo obtener la tasa" });
   }
 });
 
-app.listen(PORT, () =>
-  console.log(`Servidor corriendo en http://localhost:${PORT}`)
-);
+app.listen(PORT, () => console.log(`Servidor corriendo en http://localhost:${PORT}`));

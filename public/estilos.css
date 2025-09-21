@@ -93,3 +93,14 @@ canvas {
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   margin-top: 15px;
 }
+
+/* Pequeños ajustes para los selectores */
+.selector {
+  margin: 10px 0;
+}
+.selector label {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 500;
+  color: #333;
+}
